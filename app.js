@@ -33,7 +33,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded());
 app.use('/api', require('./routes/api/v1/adminRoutes/index'));
-app.use('/faculty', require('./routes/api/v1/facultyRoutes'));
+app.use('/api/faculty', require('./routes/api/v1/facultyRoutes'));
+app.use('/api/faculty/student', require('./routes/api/v1/studentRoutes'));
 
 app.listen(port,(err)=>{
     if(err){

@@ -131,8 +131,8 @@ module.exports.sendMail = async(req,res)=>{
                 port: 587,
                 secure: false, // true for port 465, false for other ports
                 auth: {
-                  user: "kathiriyadenisha28@gmail.com",
-                  pass: "bzjaxfvcpncgquai",
+                  user: "srushtitejani20@gmail.com",
+                  pass: "tgjjovktwihelkeb",
                 },
                 tls: {
                     rejectUnauthorized: false,
@@ -142,7 +142,7 @@ module.exports.sendMail = async(req,res)=>{
               let OTP = Math.round(Math.random()*1000000);
 
               const info = await transporter.sendMail({
-                from: 'kathiriyadenisha28@gmail.com', // sender address
+                from: 'srushtitejani20@gmail.com', // sender address
                 to: req.body.email, // list of receivers
                 subject: "verification OTP", // Subject line
                 html: `<b>OTP :${OTP}</b>`, // html body
@@ -254,4 +254,13 @@ function generatePassword() {
         retVal += charset.charAt(Math.floor(Math.random() * n));
     }
     return retVal;
+}
+
+module.exports.allFaculty = async(req,res)=>{
+    try{
+        
+    }
+    catch(err){
+        return res.status(400).json({msg:"something wrong", error:err});
+    }
 }

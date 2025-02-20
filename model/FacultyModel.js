@@ -13,6 +13,10 @@ const facultySchema = mongoose.Schema({
         type : String,
         required : true
     },
+    role:{
+        type : String,
+        default: 'Faculty'
+    },
     status:{
         type : Boolean,
         default : true

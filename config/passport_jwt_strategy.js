@@ -11,6 +11,7 @@ var opts = {
 
 const Admin = require('../model/adminModel');
 const Faculty = require('../model/FacultyModel');
+const Student = require('../model/studentModel');
 
 passport.use(new Sjwt(opts, async function(payload,done){
     let checkAdminData = await Admin.findOne({email:payload.adminData.email});
@@ -31,6 +32,21 @@ passport.use('faculty', new Sjwt(facultyOpts, async function(payload,done){
     let checkFacultyData = await Faculty.findOne({email:payload.ft.email});
     if(checkFacultyData){
         return done(null, checkFacultyData);
+    }
+    else{
+        return done(null, false)
+    }
+}))
+
+var studentOpts = {
+    jwtFromRequest : Ejwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey : 'SAPI'
+}
+
+passport.use('student', new Sjwt(studentOpts, async function(payload,done){
+    let checkStudentData = await Student.findOne({email:payload.studentData.email});
+    if(checkStudentData){
+        return done(null, checkStudentData);
     }
     else{
         return done(null, false)

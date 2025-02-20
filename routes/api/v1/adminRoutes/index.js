@@ -25,7 +25,7 @@ routes.get('/adminProfile',passport.authenticate('jwt',{failureRedirect:'/api/ad
 
 routes.put('/editAdminProfile/:id',passport.authenticate('jwt',{failureRedirect:'/api/adminFaillogin'}),adminCtl.editAdminProfile);
 
-routes.get('/adminlogout',(req,res)=>{
+routes.get('/adminlogout',passport.authenticate('jwt',{failureRedirect:'/api/adminFaillogin'}),(req,res)=>{
     try{
         req.session.destroy((err)=>{
             if(err){
@@ -37,7 +37,8 @@ routes.get('/adminlogout',(req,res)=>{
         })
     }
     catch(err){
-        return res.status(400).json({msg:'something wrong',error:err})
+        console.log(err);
+        return res.status(400).json({msg:'something went wrong',error:err})
     }
 })
 
@@ -49,6 +50,11 @@ routes.post('/sendMail',adminCtl.sendMail);
 
 routes.post('/updateForgetPassword',adminCtl.updateForgetPassword);
 
+// Faculty Registration
 routes.post('/facultyRegistration',adminCtl.facultyRegistration);
+
+// View Faculty Data
+
+routes.get('/allFaculty',adminCtl.allFaculty);
 
 module.exports = routes;
