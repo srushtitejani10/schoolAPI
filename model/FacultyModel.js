@@ -17,6 +17,14 @@ const facultySchema = mongoose.Schema({
         type : String,
         default: 'Faculty'
     },
+    admin:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Admin"
+    },
+    students:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Student"
+    }],
     status:{
         type : Boolean,
         default : true

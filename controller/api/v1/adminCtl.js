@@ -231,8 +231,11 @@ module.exports.facultyRegistration = async(req,res)=>{
                 let addFaculty = await Faculty.create({
                     email:req.body.email, 
                     password:encyGpass, 
-                    username:req.body.username
+                    username:req.body.username,
+                    admin:req.user._id
                 })
+                let adminUpdate = await Admin.updateOne({_id:req.user._id},{$push: {faculties: addFaculty._id}});
+
                     return res.status(200).json({msg:"check your email for login", data: addFaculty})
             } else{
                 return res.status(200).json({msg:"faculty not registered", data: info})
@@ -242,6 +245,8 @@ module.exports.facultyRegistration = async(req,res)=>{
         }
     }
     catch(err){
+        console.log(err);
+        
         return res.status(400).json({msg:"something wrong", error:err});
     }
 }

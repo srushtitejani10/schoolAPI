@@ -17,6 +17,10 @@ const adminSchema = mongoose.Schema({
         type : String,
         default: 'Admin'
     },
+    faculties:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Faculty"
+    }],
     status:{
         type : Boolean,
         default : true

@@ -50,6 +50,6 @@ routes.post('/FacultyPasswordChange',passport.authenticate('faculty',{failureRed
 
 // Student Registration
 
-routes.post('/studentRegistration',facultyCtl.studentRegistration);
+routes.post('/studentRegistration',passport.authenticate('faculty',{failureRedirect:'/api/faculty/facultyFaillogin'}),facultyCtl.studentRegistration);
 
 module.exports = routes;

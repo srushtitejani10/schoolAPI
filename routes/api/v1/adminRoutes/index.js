@@ -51,7 +51,7 @@ routes.post('/sendMail',adminCtl.sendMail);
 routes.post('/updateForgetPassword',adminCtl.updateForgetPassword);
 
 // Faculty Registration
-routes.post('/facultyRegistration',adminCtl.facultyRegistration);
+routes.post('/facultyRegistration',passport.authenticate('jwt',{failureRedirect:'/api/adminFaillogin'}),adminCtl.facultyRegistration);
 
 // View Faculty Data
 

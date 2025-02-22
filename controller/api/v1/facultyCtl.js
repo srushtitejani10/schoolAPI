@@ -197,8 +197,11 @@ module.exports.studentRegistration = async(req,res)=>{
                 let addStudent = await Student.create({
                     email:req.body.email, 
                     password:encyGpass, 
-                    username:req.body.username
+                    username:req.body.username,
+                    faculty:req.user._id
                 })
+                let facultyUpdate = await Faculty.updateOne({_id:req.user._id},{$push: {students: addStudent._id}});
+                
                     return res.status(200).json({msg:"check your email for login", data: addStudent})
             } else{
                 return res.status(200).json({msg:"student not registered", data: info})
